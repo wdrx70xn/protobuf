@@ -382,6 +382,12 @@ cc_proto_library(
     deps = [":json_enumvalue_options_proto"],
 )
 
+java_proto_library(
+    name = "json_enumvalue_options_java_proto",
+    visibility = ["//:__subpackages__"],
+    deps = [":json_enumvalue_options_proto"],
+)
+
 ################################################################################
 # C++ Runtime Library
 ################################################################################
