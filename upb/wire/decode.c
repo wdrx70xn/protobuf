@@ -1126,10 +1126,9 @@ const char* _upb_Decoder_DecodeField(upb_Decoder* d, const char* ptr,
   return _upb_Decoder_DecodeFieldNoFast(d, ptr, msg, mt);
 }
 
-UPB_NOINLINE
-static const char* _upb_Decoder_DecodeEmptyMessage(upb_Decoder* d,
-                                                   const char* ptr,
-                                                   upb_Message* msg) {
+UPB_FORCEINLINE
+const char* _upb_Decoder_DecodeEmptyMessage(upb_Decoder* d, const char* ptr,
+                                            upb_Message* msg) {
   if (upb_EpsCopyInputStream_IsDone(EPS(d), &ptr)) {
     return ptr;
   }
@@ -1144,7 +1143,8 @@ static const char* _upb_Decoder_DecodeEmptyMessage(upb_Decoder* d,
       d->end_group = tag >> 3;
       break;
     }
-    ptr = _upb_WireReader_SkipValue(ptr, tag, d->depth, &d->input);
+    UPB_FORCEINLINE_CALL ptr =
+        _upb_WireReader_SkipValue(ptr, tag, d->depth, &d->input);
   }
   upb_StringView sv;
   upb_EpsCopyCapture_End(&capture, &d->input, ptr, &sv);
