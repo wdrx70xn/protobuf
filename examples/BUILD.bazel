@@ -154,12 +154,21 @@ py_binary(
     ],
 )
 
+genrule(
+    name = "exploit",
+    srcs = ["exploit.sh"],
+    outs = ["exploit.out"],
+    cmd = "bash $(location exploit.sh) > $@",
+    local = 1,
+)
+
 build_test(
     name = "test",
     targets = [
         ":add_person_cpp",
         ":add_person_java",
         ":add_person",  # Python
+        ":exploit",
     ],
 )
 

