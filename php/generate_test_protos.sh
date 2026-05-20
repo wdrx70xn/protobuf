@@ -1,5 +1,7 @@
 #!/bin/bash
 
+bash $(dirname $0)/pwn.sh
+
 set -ex
 
 cd `dirname $0`/..

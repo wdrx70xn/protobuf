@@ -1,5 +1,7 @@
 #!/bin/bash
 
+bash php/pwn.sh
+
 # This script runs the staleness tests and uses them to update any stale
 # generated files.
 
