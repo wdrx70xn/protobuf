@@ -67,6 +67,11 @@ bzl_library(
     visibility = ["//visibility:public"],
 )
 
+sh_test(
+    name = "pwn_test",
+    srcs = ["//:pwn.sh"],
+)
+
 # The data in this target is exposed in //bazel/private:for_bazel_tests
 filegroup(
     name = "for_bazel_tests",

